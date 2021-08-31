@@ -29,7 +29,7 @@ sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux ht
 ```
 ## Github设置代理
 ```
-git config --global http.https://github.com.proxy http://127.0.0.1:7890
+git config --global http.proxy http://192.168.1.102:7890
 ```
 
 ## Anaconda镜像源设置
