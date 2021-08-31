@@ -27,6 +27,10 @@ sudo apt install system76-cuda-latest system76-cudnn-10.2
 ```
 sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey mpv guake folder-color gnome-sushi -y
 ```
+## Github设置代理
+```
+git config --global http.https://github.com.proxy http://127.0.0.1:7890
+```
 
 ## Anaconda镜像源设置
 ```
@@ -178,13 +182,4 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ### 把Zsh是设为默认Shell
 ```
 sudo usermod -s /usr/bin/zsh $(whoami)
-```
-
-```c
-#include <stdio.h>
-
-int main(void){
-  printf("Hello World！")；
-  return 0;
-}
 ```
