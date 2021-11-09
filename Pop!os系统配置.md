@@ -183,3 +183,26 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
 sudo usermod -s /usr/bin/zsh $(whoami)
 ```
+
+## 增加硬盘
+```
+lsblk
+#格式化
+sudo mkfs -t ext4 /dev/sdb
+#挂载
+sudo mount /dev/sdb /home/ubuntu/mystore
+#改权限
+sudo chmod 755 ~/mystore
+sudo chown ubuntu ~/mystore
+#获取uuid
+ls -l /dev/disk/by-uuid
+#备份
+sudo cp /etc/fstab /etc/fstab.bak
+#配置开机挂载
+sudo vim /etc/fstab
+UUID=8411c84d-c94c-4c69-b488-40e85af76645 /home/ubuntu/mystore ext4 defaults 0 2
+sudo mount -a
+#恢复
+cp /etc/fstab.bak /etc/fstab
+```
+
