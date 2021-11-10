@@ -1,0 +1,165 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/Website/libs/highlight/github.min.css"> <link rel=stylesheet  href="/Website/css/franklin.css"> <link rel=stylesheet  href="/Website/css/basic.css"> <link rel=icon  href="/Website/assets/favicon.png"> <title>Django</title> <script src="/Website/libs/clipboard.min.js"></script> <script src="/Website/libs/backtotop.js"></script> <link rel=stylesheet  href="/Website/libs/all.min.css"> <link rel=stylesheet  href="/Website/libs/backtotop.css"> <header> <div class=blog-name ><a href="/Website/">学习随记</a></div> <nav> <ul> <li><a href="/Website/">索引</a> <li><a href="/Website/Pop!os系统配置/">Pop!os系统配置</a> <li><a href="/Website/Django建站">Django建站</a> </ul> <img src="/Website/assets/hamburger.svg" id=menu-icon > <button id=back-to-top-btn  class="btnEntrance btnExit" onclick="smoothScrollBackToTop()";><i class="fas fa-angle-double-up"></i></button> </nav> </header> <div class=franklin-content ><div class=franklin-toc ><ol><li><a href="#依赖">依赖</a><li><a href="#postgre数据库设置">Postgre数据库设置</a><ol><li><a href="#更改数据目录">更改数据目录</a></ol><li><a href="#初始化django工程">初始化Django工程</a><li><a href="#安装django-simpleui美化后台管理页面">安装django-simpleui，美化后台管理页面</a><li><a href="#settingspy配置">Settings.py配置</a></ol></div> <h2 id="依赖"><a href="#依赖" class=header-anchor >依赖</a></h2> <pre><code class="julia hljs">pip install django django-simpleui gunicorn psycopg2-binary</code></pre>
+<h2 id="postgre数据库设置"><a href="#postgre数据库设置" class=header-anchor >Postgre数据库设置</a></h2>
+<pre><code class="julia hljs"><span class=hljs-comment >#原文链接：https://sleeksoft.in/deploy-django-website-in-ubuntu-server-using-nginx-gunicorn-and-wsgi-with-postgres-db/</span>
+sudo -u postgres psql
+CREATE DATABASE myweb;
+CREATE USER user WITH PASSWORD &#x27;password&#x27;;
+ALTER ROLE user SET client_encoding TO &#x27;utf8&#x27;;
+ALTER ROLE user SET default_transaction_isolation TO &#x27;read committed&#x27;;
+ALTER ROLE user SET timezone TO &#x27;UTC&#x27;;
+GRANT ALL PRIVILEGES ON DATABASE myweb TO user;
+\q</code></pre>
+<h3 id="更改数据目录"><a href="#更改数据目录" class=header-anchor >更改数据目录</a></h3>
+<pre><code class="julia hljs"><span class=hljs-comment >#原文链接：https://fitodic.github.io/how-to-change-postgresql-data-directory-on-linux</span>
+sudo su - postgres
+SHOW config_file; <span class=hljs-comment ># /etc/postgresql/12/main/postgresql.conf</span>
+SHOW data_directory; <span class=hljs-comment ># /var/lib/postgresql/12/main</span>
+<span class=hljs-comment >#关闭服务</span>
+systemctl stop postgresql.service
+<span class=hljs-comment >#创建新数据目录</span>
+mkdir /home/ubuntu/mystore/pgdata
+<span class=hljs-comment >#赋予权限</span>
+chown postgres:postgres /home/ubuntu/mystore/pgdata
+chmod <span class=hljs-number >700</span> /home/ubuntu/mystore/pgdata
+<span class=hljs-comment >#数据转移</span>
+rsync -av /var/lib/postgresql/<span class=hljs-number >12</span>/main /home/ubuntu/mystore/pgdata/main
+<span class=hljs-comment >#更改设置</span>
+sudo vim /home/pgdata/data/postgresql.conf
+data_directory = &#x27;/home/pgdata/data&#x27; 
+<span class=hljs-comment >#重启服务</span>
+systemctl daemon-reload
+systemctl start postgresql.service
+systemctl status postgresql.service</code></pre>
+<h2 id="初始化django工程"><a href="#初始化django工程" class=header-anchor >初始化Django工程</a></h2>
+<pre><code class="julia hljs"><span class=hljs-comment >#建立Django项目</span>
+django-admin startproject myweb
+cd myweb
+<span class=hljs-comment >#生成数据库迁移</span>
+python manage.py makemigrations
+<span class=hljs-comment >#迁移数据库</span>
+python manage.py migrate
+<span class=hljs-comment >#创建管理员</span>
+python manage.py createsuperuser
+<span class=hljs-comment >#创建App</span>
+python manage.py startapp blog</code></pre>
+<h2 id="安装django-simpleui美化后台管理页面"><a href="#安装django-simpleui美化后台管理页面" class=header-anchor >安装django-simpleui，美化后台管理页面</a></h2>
+<pre><code class="julia hljs">pip install django-simpleui</code></pre>
+<h2 id="settingspy配置"><a href="#settingspy配置" class=header-anchor >Settings.py配置</a></h2>
+<pre><code class="julia hljs">ALLOWED_HOSTS = [<span class=hljs-string >&#x27;*&#x27;</span>, ]
+
+INSTALLED_APPS = [
+    &#x27;simpleui&#x27;,                      <span class=hljs-comment >#新加入</span>
+    &#x27;django.contrib.admin&#x27;,
+    &#x27;django.contrib.auth&#x27;,
+    &#x27;django.contrib.contenttypes&#x27;,
+    &#x27;django.contrib.sessions&#x27;,
+    &#x27;django.contrib.messages&#x27;,
+    &#x27;django.contrib.staticfiles&#x27;,
+
+    &#x27;blog&#x27;,                          <span class=hljs-comment >#新加入</span>
+]
+
+        &#x27;DIRS&#x27;: [
+            os.path.join(BASE_DIR, &#x27;templates&#x27;),
+            os.path.join(BASE_DIR, &#x27;templates/blog&#x27;),
+        ],
+
+DATABASES = {
+    &#x27;default&#x27;: {
+        &#x27;ENGINE&#x27;: &#x27;django.db.backends.postgresql_psycopg2&#x27;,
+        &#x27;NAME&#x27;: &#x27;myweb&#x27;,
+        &#x27;USER&#x27;: &#x27;user&#x27;,
+        &#x27;PASSWORD&#x27;: &#x27;password&#x27;,
+        &#x27;HOST&#x27;: &#x27;localhost&#x27;,
+        &#x27;PORt&#x27;: &#x27;&#x27;,
+    }
+
+LANGUAGE_CODE = &#x27;zh-hans&#x27;
+
+TIME_ZONE = &#x27;Asia/Shanghai&#x27;
+
+USE_TZ = False
+
+STATIC_ROOT = BASE_DIR / &#x27;static&#x27;
+<span class=hljs-comment >#这个是设置静态文件夹目录的路径</span>
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &#x27;static&#x27;),
+)
+<span class=hljs-comment >#设置文件上传路径，图片上传、文件上传都会存放在此目录里</span>
+MEDIA_URL = &#x27;/media/&#x27;
+MEDIA_ROOT = os.path.join(BASE_DIR, &#x27;media&#x27;)</code></pre>
+<div class=page-foot >
+  <div class=copyright >
+    &copy; cuijiahua. Last modified: 2021-11-10.
+  </div>
+  <div class=copyright >
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>
+  </div>
+</div>
+</div>
+    
+    
+        
+
+
+    
+
+
+<script>
+    (function(){
+    
+        // Get the elements.
+        // - the 'pre' element.
+        // - the 'div' with the 'paste-content' id.
+    
+        var pre = document.getElementsByTagName('pre');
+    
+        // Add a copy button in the 'pre' element.
+        // which only has the className of 'language-'.
+    
+        for (var i = 0; i < pre.length; i++) {
+            var isLanguage = pre[i].children[0].className.indexOf('language-');
+    
+            if ( isLanguage === 0 ) {
+                var button           = document.createElement('button');
+                        button.className = 'copy-button';
+                        button.textContent = 'Copy';
+    
+                        pre[i].appendChild(button);
+            }
+        };
+    
+        // Run Clipboard
+    
+        var copyCode = new Clipboard('.copy-button', {
+            target: function(trigger) {
+                return trigger.previousElementSibling;
+        }
+        });
+    
+        // On success:
+        // - Change the "Copy" text to "Copied".
+        // - Swap it to "Copy" in 2s.
+        // - Lead user to the "contenteditable" area with Velocity scroll.
+    
+        copyCode.on('success', function(event) {
+            event.clearSelection();
+            event.trigger.textContent = 'Copied';
+            window.setTimeout(function() {
+                event.trigger.textContent = 'Copy';
+            }, 2000);
+    
+        });
+    
+        // On error (Safari):
+        // - Change the  "Press Ctrl+C to copy"
+        // - Swap it to "Copy" in 2s.
+    
+        copyCode.on('error', function(event) {
+            event.trigger.textContent = 'Press "Ctrl + C" to copy';
+            window.setTimeout(function() {
+                event.trigger.textContent = 'Copy';
+            }, 5000);
+        });
+    })();
+</script>
