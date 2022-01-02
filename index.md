@@ -2,5 +2,3 @@
 @def tags = ["syntax", "code"]
 @def tags = ["syntax", "Django"]
 \toc
-
-
