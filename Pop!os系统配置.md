@@ -25,7 +25,7 @@ sudo apt install system76-cuda-latest system76-cudnn-10.2
 
 ## 安装常用软件
 ```
-sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey mpv guake folder-color gnome-sushi -y
+sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey gnome-mpv folder-color gnome-sushi -y
 ```
 ## Github设置代理
 ```
