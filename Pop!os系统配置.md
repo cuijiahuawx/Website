@@ -9,8 +9,8 @@
 sudo nano /etc/apt/apt.conf.d/proxy.conf
 ```
 ```
-Acquire::http::Proxy "http://192.168.1.102:7890/";
-Acquire::https::Proxy "http://192.168.1.102:7890/";
+Acquire::http::Proxy "http://127.0.0.1:7890";
+Acquire::https::Proxy "http://127.0.0.1:7890";
 ```
 
 ## 更新系统
@@ -29,7 +29,7 @@ sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux ht
 ```
 ## Github设置代理
 ```
-git config --global http.proxy http://192.168.1.102:7890
+git config --global http.proxy http://127.0.0.1:7890
 ```
 
 ## Anaconda镜像源设置
@@ -162,8 +162,8 @@ vim ~/.zshrc
 export PATH=/home/cjh/.local/bin:$PATH
 export PATH=/home/cjh/anaconda3/bin:$PATH
 
-export http_proxy="http://192.168.1.102:7890"
-export https_proxy="http://192.168.1.102:7890"
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
 
 alias add="sudo apt install" 
 alias sj="sudo apt update && sudo apt upgrade" 
