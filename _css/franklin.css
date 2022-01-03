@@ -94,16 +94,13 @@ html {
 }
 
 .franklin-toc li a{
-  font-family: '站酷仓耳渔阳体-W01';
-  color: black;
+  color: gray;
 }
 
 .franklin-toc li a:hover{
-  font-family: '站酷仓耳渔阳体-W01';
   color: black;
   text-decoration: none;
-  font-size: larger;
-  color: red;
+  border-bottom: 2px solid black;
 }
 .franklin-content {
   position: relative;
@@ -133,11 +130,9 @@ html {
     TITLES
 ================================================================== */
 
-.franklin-content h1 { font-size: 30px; color:red;}
-.franklin-content h2 { font-size: 25px; color: green;}
-.franklin-content h3 { font-size: 20px; color: blue;}
-.franklin-content h4 { font-size: 18px; color:purple;}
-.franklin-content h5 { font-size: 16px; color: orange;}
+.franklin-content h1 { font-size: 30px; color:turquoise;}
+.franklin-content h2 { font-size: 25px; color: pink;}
+.franklin-content h3 { font-size: 20px; color: orange;}
 
 
 .franklin-content h2,
@@ -148,28 +143,27 @@ h6 {
   text-align: left;
 }
 
-.franklin-content h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: '站酷仓耳渔阳体-W01';
-}
-
 .franklin-content h1 {
   text-align: center;
   padding-bottom: 0.5em;
-  border-bottom: 3px double red;
+  border-bottom: 3px double turquoise;
   margin-top: 1.5em;
   margin-bottom: 1em;
 }
 
 .franklin-content h2 {
   padding-bottom: 0.3em;
-  border-bottom: 1px solid green;
+  border-bottom: 3px solid pink;
   margin-top: 2em;
   margin-bottom: 1em;
+}
+
+.franklin-content h3 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid orange;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  margin-left: 1em;
 }
 
 .franklin-content h1 a { color: inherit; }
@@ -393,10 +387,20 @@ pre {
   color:red;
 }
 
-ul li::marker {
-  color: hotpink;
+div.franklin-content > ul > li > a{
+  color: gray;
+  text-decoration: none;
 }
 
+div.franklin-content > ul > li > a:hover{
+  color: black;
+  text-decoration: none;
+  border-bottom: 2px solid black;
+}
+
+ul li::marker {
+  color: turquoise;
+}
 ul li:first-child::marker {
   font-size: 1rem;
 }
@@ -404,7 +408,6 @@ ul li:first-child::marker {
 ol li::marker {
   color: turquoise;
 }
-
 ol li:first-child::marker {
-  font-size: 2rem;
+  font-size: 1rem;
 }
