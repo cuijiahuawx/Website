@@ -1,16 +1,18 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/Website/libs/highlight/github.min.css"> <link rel=stylesheet  href="/Website/css/franklin.css"> <link rel=stylesheet  href="/Website/css/basic.css"> <link rel=icon  href="/Website/assets/favicon.png"> <title>Pop!os系统配置</title> <script src="/Website/libs/clipboard.min.js"></script> <script src="/Website/libs/backtotop.js"></script> <link rel=stylesheet  href="/Website/libs/all.min.css"> <link rel=stylesheet  href="/Website/libs/backtotop.css"> <header> <div class=blog-name ><a href="/Website/">学习随记</a></div> <nav> <ul> <li><a href="/Website/">索引</a> </ul> <img src="/Website/assets/hamburger.svg" id=menu-icon > <button id=back-to-top-btn  class="btnEntrance btnExit" onclick="smoothScrollBackToTop()";><i class="fas fa-angle-double-up"></i></button> </nav> </header> <div class=franklin-content ><div class=franklin-toc ><ol><li><a href="#配置apt代理">配置apt代理</a><li><a href="#更新系统">更新系统</a><li><a href="#安装cuda">安装CUDA</a><li><a href="#安装常用软件">安装常用软件</a><li><a href="#github设置代理">Github设置代理</a><li><a href="#anaconda镜像源设置">Anaconda镜像源设置</a><li><a href="#pypi镜像源设置">Pypi镜像源设置</a><li><a href="#pip安装常用库">Pip安装常用库</a><li><a href="#安装colors">安装colors</a><li><a href="#安装nautilus_terminal">安装Nautilus Terminal</a><li><a href="#安装code插件">安装Code插件</a><li><a href="#tmux配置">Tmux配置</a><li><a href="#安装nodejs">安装Node.js</a><li><a href="#安装tauon">安装Tauon</a><li><a href="#安装obs">安装OBS</a><li><a href="#安装typora">安装Typora</a><li><a href="#安装edge">安装Edge</a><li><a href="#zsh配置">Zsh配置</a><ol><li><a href="#安装oh-my-zsh">安装Oh-my-zsh</a><li><a href="#安装autosuggestions">安装Autosuggestions</a><li><a href="#安装syntax-highlighting">安装Syntax-highlighting </a><li><a href="#安装powerlevel10k">安装Powerlevel10k</a><li><a href="#下载字体">下载字体</a><li><a href="#配置zsh皮肤">配置Zsh皮肤</a><li><a href="#添加环境变量">添加环境变量</a><li><a href="#把zsh是设为默认shell">把Zsh是设为默认Shell</a></ol><li><a href="#增加硬盘">增加硬盘</a></ol></div> <h1 id="popos系统配置"><a href="#popos系统配置" class=header-anchor >Pop&#33;os系统配置</a></h1> <h2 id="配置apt代理"><a href="#配置apt代理" class=header-anchor >配置apt代理</a></h2> <pre><code class="julia hljs">sudo nano /etc/apt/apt.conf.d/proxy.conf</code></pre>
-<pre><code class="julia hljs">Acquire::http::Proxy <span class=hljs-string >&quot;http://127.0.0.1:7890&quot;</span>;
-Acquire::https::Proxy <span class=hljs-string >&quot;http://127.0.0.1:7890&quot;</span>;</code></pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/Website/libs/highlight/github.min.css"> <link rel=stylesheet  href="/Website/css/franklin.css"> <link rel=stylesheet  href="/Website/css/basic.css"> <link rel=icon  href="/Website/assets/favicon.png"> <title>Pop!os系统配置</title> <script src="/Website/libs/clipboard.min.js"></script> <script src="/Website/libs/backtotop.js"></script> <link rel=stylesheet  href="/Website/libs/all.min.css"> <link rel=stylesheet  href="/Website/libs/backtotop.css"> <header> <div class=blog-name ><a href="/Website/">学习随记</a></div> <nav> <ul> <li><a href="/Website/">索引</a> </ul> <img src="/Website/assets/hamburger.svg" id=menu-icon > <button id=back-to-top-btn  class="btnEntrance btnExit" onclick="smoothScrollBackToTop()";><i class="fas fa-angle-double-up"></i></button> </nav> </header> <div class=franklin-content ><div class=franklin-toc ><ol><li><a href="#配置apt代理">配置apt代理</a><li><a href="#更新系统">更新系统</a><li><a href="#安装cuda">安装CUDA</a><li><a href="#安装常用软件">安装常用软件</a><li><a href="#celluloidgnome-mpv">celluloid&#40;gnome-mpv&#41;</a><li><a href="#github设置代理">Github设置代理</a><li><a href="#anaconda镜像源设置">Anaconda镜像源设置</a><li><a href="#pypi镜像源设置">Pypi镜像源设置</a><li><a href="#pip安装常用库">Pip安装常用库</a><li><a href="#安装colors">安装colors</a><li><a href="#安装nautilus_terminal">安装Nautilus Terminal</a><li><a href="#nautilus_copy_pathname">Nautilus Copy Path/Name</a><li><a href="#安装code插件">安装Code插件</a><li><a href="#tmux配置">Tmux配置</a><li><a href="#安装nodejs">安装Node.js</a><li><a href="#安装obs">安装OBS</a><li><a href="#zsh配置">Zsh配置</a><ol><li><a href="#安装oh-my-zsh">安装Oh-my-zsh</a><li><a href="#安装autosuggestions">安装Autosuggestions</a><li><a href="#安装syntax-highlighting">安装Syntax-highlighting </a><li><a href="#安装powerlevel10k">安装Powerlevel10k</a><li><a href="#下载字体">下载字体</a><li><a href="#配置zsh皮肤">配置Zsh皮肤</a><li><a href="#添加环境变量">添加环境变量</a><li><a href="#把zsh是设为默认shell">把Zsh是设为默认Shell</a></ol><li><a href="#增加硬盘">增加硬盘</a></ol></div> <h1 id="popos系统配置"><a href="#popos系统配置" class=header-anchor >Pop&#33;os系统配置</a></h1> <h2 id="配置apt代理"><a href="#配置apt代理" class=header-anchor >配置apt代理</a></h2> <pre><code class="txt hljs">sudo nano /etc/apt/apt.conf.d/proxy.conf</code></pre>
+<pre><code class="txt hljs">Acquire::http::Proxy &quot;http://127.0.0.1:7890&quot;;
+Acquire::https::Proxy &quot;http://127.0.0.1:7890&quot;;</code></pre>
 <h2 id="更新系统"><a href="#更新系统" class=header-anchor >更新系统</a></h2>
-<pre><code class="julia hljs">sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
+<pre><code class="txt hljs">sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
 <h2 id="安装cuda"><a href="#安装cuda" class=header-anchor >安装CUDA</a></h2>
-<pre><code class="julia hljs">sudo apt install system76-cuda-latest system76-cudnn-<span class=hljs-number >10.2</span></code></pre>
+<pre><code class="txt hljs">sudo apt install system76-cuda-latest system76-cudnn-11.2</code></pre>
 <h2 id="安装常用软件"><a href="#安装常用软件" class=header-anchor >安装常用软件</a></h2>
-<pre><code class="julia hljs">sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey gnome-mpv folder-color gnome-sushi -y</code></pre>
+<pre><code class="txt hljs">sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey gnome-mpv folder-color gnome-sushi nautilus-admin nautilus-scripts -y</code></pre>
+<h2 id=celluloidgnome-mpv ><a href="#celluloidgnome-mpv" class=header-anchor >celluloid&#40;gnome-mpv&#41;</a></h2>
+
 <h2 id="github设置代理"><a href="#github设置代理" class=header-anchor >Github设置代理</a></h2>
-<pre><code class="julia hljs">git config --<span class=hljs-keyword >global</span> http.proxy http://<span class=hljs-number >127.0</span><span class=hljs-number >.0</span><span class=hljs-number >.1</span>:<span class=hljs-number >7890</span></code></pre>
+<pre><code class="txt hljs">git config --global http.proxy http://127.0.0.1:7890</code></pre>
 <h2 id="anaconda镜像源设置"><a href="#anaconda镜像源设置" class=header-anchor >Anaconda镜像源设置</a></h2>
-<pre><code class="julia hljs">nano ~/.condarc
+<pre><code class="txt hljs">nano ~/.condarc
 
 default_channels:
   - https://mirrors.sjtug.sjtu.edu.cn/anaconda/pkgs/r
@@ -21,103 +23,102 @@ custom_channels:
 channels:
   - defaults</code></pre>
 <h2 id="pypi镜像源设置"><a href="#pypi镜像源设置" class=header-anchor >Pypi镜像源设置</a></h2>
-<pre><code class="julia hljs">nano  ~/.config/pip/pip.conf
+<pre><code class="txt hljs">nano  ~/.config/pip/pip.conf
 
-[<span class=hljs-keyword >global</span>]
+[global]
 index-url = https://mirrors.sjtug.sjtu.edu.cn/pypi/web/simple
 format = columns</code></pre>
 <h2 id="pip安装常用库"><a href="#pip安装常用库" class=header-anchor >Pip安装常用库</a></h2>
-<pre><code class="julia hljs">pip install django flask fastapi aiohttp requests beautifulsoup4 scrapy youtube-dl</code></pre>
+<pre><code class="txt hljs">pip install django flask fastapi aiohttp requests beautifulsoup4 scrapy youtube-dl</code></pre>
 <h2 id="安装colors"><a href="#安装colors" class=header-anchor >安装colors</a></h2>
-<pre><code class="julia hljs">sudo gem install colorls</code></pre>
+<pre><code class="txt hljs">sudo gem install colorls</code></pre>
 <h2 id="安装nautilus_terminal"><a href="#安装nautilus_terminal" class=header-anchor >安装Nautilus Terminal</a></h2>
-<pre><code class="julia hljs">sudo pip3 install nautilus-terminal
+<pre><code class="julia hljs">sudo apt install python3-nautilus python3-psutil python3-pip libglib2<span class=hljs-number >.0</span>-bin dconf-editor
+sudo pip3 install nautilus-terminal
 sudo nautilus-terminal --install-system
 nautilus -q</code></pre>
+<h2 id=nautilus_copy_pathname ><a href="#nautilus_copy_pathname" class=header-anchor >Nautilus Copy Path/Name</a></h2>
+<pre><code class="txt hljs">sudo apt install python-nautilus python3-gi
+git clone https://github.com/chr314/nautilus-copy-path.git
+cd nautilus-copy-path
+make install
+nautilus -q</code></pre>
 <h2 id="安装code插件"><a href="#安装code插件" class=header-anchor >安装Code插件</a></h2>
-<pre><code class="julia hljs">wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash</code></pre>
+<pre><code class="txt hljs">wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash</code></pre>
 <h2 id="tmux配置"><a href="#tmux配置" class=header-anchor >Tmux配置</a></h2>
-<pre><code class="julia hljs">cd
+<pre><code class="txt hljs">cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
-cp .tmux/.tmux.conf.<span class=hljs-keyword >local</span> .</code></pre>
+cp .tmux/.tmux.conf.local .</code></pre>
 <h2 id="安装nodejs"><a href="#安装nodejs" class=header-anchor >安装Node.js</a></h2>
-<pre><code class="julia hljs">curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs</code></pre>
-<h2 id="安装tauon"><a href="#安装tauon" class=header-anchor >安装Tauon</a></h2>
-<pre><code class="julia hljs">flatpak install flathub com.github.taiko2k.tauonmb</code></pre>
+<pre><code class="txt hljs">curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+代理
+npm config set proxy=http://127.0.0.1:7890
+
+# 配置指向源
+npm config set registry http://registry.npm.taobao.org
+npm config set registry https://registry.npm.taobao.org</code></pre>
 <h2 id="安装obs"><a href="#安装obs" class=header-anchor >安装OBS</a></h2>
-<pre><code class="julia hljs">sudo add-apt-repository ppa:obsproject/obs-studio
+<pre><code class="txt hljs">sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt update
 sudo apt install obs-studio</code></pre>
-<h2 id="安装typora"><a href="#安装typora" class=header-anchor >安装Typora</a></h2>
-<pre><code class="julia hljs">wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
-sudo add-apt-repository &#x27;deb https://typora.io/linux ./&#x27;
-sudo apt-get update
-sudo apt-get install typora</code></pre>
-<h2 id="安装edge"><a href="#安装edge" class=header-anchor >安装Edge</a></h2>
-<pre><code class="julia hljs">curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor &gt; microsoft.gpg
-sudo install -o root -g root -m <span class=hljs-number >644</span> microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c &#x27;echo <span class=hljs-string >&quot;deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main&quot;</span> &gt; /etc/apt/sources.list.d/microsoft-edge-dev.list&#x27;
-sudo rm microsoft.gpg
-sudo apt update
-sudo apt install microsoft-edge-dev</code></pre>
 <h2 id="zsh配置"><a href="#zsh配置" class=header-anchor >Zsh配置</a></h2>
 <h3 id="安装oh-my-zsh"><a href="#安装oh-my-zsh" class=header-anchor >安装Oh-my-zsh</a></h3>
-<pre><code class="julia hljs">wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh</code></pre>
+<pre><code class="txt hljs">wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh</code></pre>
 <h3 id="安装autosuggestions"><a href="#安装autosuggestions" class=header-anchor >安装Autosuggestions</a></h3>
-<pre><code class="julia hljs">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code></pre>
+<pre><code class="txt hljs">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code></pre>
 <h3 id="安装syntax-highlighting"><a href="#安装syntax-highlighting" class=header-anchor >安装Syntax-highlighting </a></h3>
-<pre><code class="julia hljs">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
+<pre><code class="txt hljs">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
 <h3 id="安装powerlevel10k"><a href="#安装powerlevel10k" class=header-anchor >安装Powerlevel10k</a></h3>
-<pre><code class="julia hljs">git clone --depth=<span class=hljs-number >1</span> https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</code></pre>
+<pre><code class="txt hljs">git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</code></pre>
 <h3 id="下载字体"><a href="#下载字体" class=header-anchor >下载字体</a></h3>
-<pre><code class="julia hljs">wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%<span class=hljs-number >20</span>NF%<span class=hljs-number >20</span>Regular.ttf</code></pre>
+<pre><code class="txt hljs">wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf</code></pre>
 <h3 id="配置zsh皮肤"><a href="#配置zsh皮肤" class=header-anchor >配置Zsh皮肤</a></h3>
-<pre><code class="julia hljs">p10k configure</code></pre>
+<pre><code class="txt hljs">p10k configure</code></pre>
 <h3 id="添加环境变量"><a href="#添加环境变量" class=header-anchor >添加环境变量</a></h3>
-<pre><code class="julia hljs">vim ~/.zshrc</code></pre>
-<p>添加以下内容到文件中</p>
-<pre><code class="julia hljs"><span class=hljs-keyword >export</span> PATH=/home/cjh/.<span class=hljs-keyword >local</span>/bin:$PATH
-<span class=hljs-keyword >export</span> PATH=/home/cjh/anaconda3/bin:$PATH
+<pre><code class="txt hljs">vim ~/.zshrc</code></pre>
+<pre><code class="txt hljs">export PATH=/home/cjh/.local/bin:$PATH
+export PATH=/home/cjh/anaconda3/bin:$PATH
 
-<span class=hljs-keyword >export</span> http_proxy=<span class=hljs-string >&quot;http://127.0.0.1:7890&quot;</span>
-<span class=hljs-keyword >export</span> https_proxy=<span class=hljs-string >&quot;http://127.0.0.1:7890&quot;</span>
+export http_proxy=&quot;http://127.0.0.1:7890&quot;
+export https_proxy=&quot;http://127.0.0.1:7890&quot;
 
-alias add=<span class=hljs-string >&quot;sudo apt install&quot;</span> 
-alias sj=<span class=hljs-string >&quot;sudo apt update &amp;&amp; sudo apt upgrade&quot;</span> 
-alias lc=<span class=hljs-string >&quot;colorls&quot;</span>
-alias az=<span class=hljs-string >&quot;sudo dpkg -i&quot;</span>
-alias v=<span class=hljs-string >&quot;vim&quot;</span>
-alias lc=<span class=hljs-string >&quot;colorls&quot;</span>
-alias <span class=hljs-literal >pi</span>=<span class=hljs-string >&quot;ssh -p 22 pi@192.168.1.102&quot;</span></code></pre>
-<p>替换文件中以下的内容</p>
-<pre><code class="julia hljs">ZSH_THEME=<span class=hljs-string >&quot;powerlevel10k/powerlevel10k&quot;</span>
+alias add=&quot;sudo apt install&quot; 
+alias sj=&quot;sudo apt update &amp;&amp; sudo apt upgrade&quot; 
+alias lc=&quot;colorls&quot;
+alias az=&quot;sudo dpkg -i&quot;
+alias v=&quot;vim&quot;
+alias lc=&quot;colorls&quot;
+alias pi=&quot;ssh -p 22 pi@192.168.1.102&quot;
+
+ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot;
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</code></pre>
 <h3 id="把zsh是设为默认shell"><a href="#把zsh是设为默认shell" class=header-anchor >把Zsh是设为默认Shell</a></h3>
-<pre><code class="julia hljs">sudo usermod -s /usr/bin/zsh $(whoami)</code></pre>
+<pre><code class="txt hljs">sudo usermod -s /usr/bin/zsh $(whoami)</code></pre>
 <h2 id="增加硬盘"><a href="#增加硬盘" class=header-anchor >增加硬盘</a></h2>
-<pre><code class="julia hljs">lsblk
-<span class=hljs-comment >#格式化</span>
+<pre><code class="txt hljs">lsblk
+#格式化
 sudo mkfs -t ext4 /dev/sdb
-<span class=hljs-comment >#挂载</span>
+#挂载
 sudo mount /dev/sdb /home/ubuntu/mystore
-<span class=hljs-comment >#改权限</span>
-sudo chmod <span class=hljs-number >755</span> ~/mystore
+#改权限
+sudo chmod 755 ~/mystore
 sudo chown ubuntu ~/mystore
-<span class=hljs-comment >#获取uuid</span>
+#获取uuid
 ls -l /dev/disk/by-uuid
-<span class=hljs-comment >#备份</span>
+#备份
 sudo cp /etc/fstab /etc/fstab.bak
-<span class=hljs-comment >#配置开机挂载</span>
+#配置开机挂载
 sudo vim /etc/fstab
-UUID=<span class=hljs-number >8411</span>c84d-c94c-<span class=hljs-number >4</span>c69-b488-<span class=hljs-number >40e85</span>af76645 /home/ubuntu/mystore ext4 defaults <span class=hljs-number >0</span> <span class=hljs-number >2</span>
+UUID=8411c84d-c94c-4c69-b488-40e85af76645 /home/ubuntu/mystore ext4 defaults 0 2
 sudo mount -a
-<span class=hljs-comment >#恢复</span>
+#恢复
 cp /etc/fstab.bak /etc/fstab</code></pre>
 <div class=page-foot >
   <div class=copyright >
-    &copy; cuijiahua. Last modified: 2022-01-03.
+    &copy; cuijiahua. Last modified: 2022-01-09.
   </div>
   <div class=copyright >
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>
