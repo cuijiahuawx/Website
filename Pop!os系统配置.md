@@ -2,38 +2,53 @@
 @def tags = ["Config", "System", "Tutorial"]
 
 \toc
+
 # Pop!os系统配置
 
 ## 配置apt代理
-```
+
+```txt
 sudo nano /etc/apt/apt.conf.d/proxy.conf
 ```
-```
+
+```txt
 Acquire::http::Proxy "http://127.0.0.1:7890";
 Acquire::https::Proxy "http://127.0.0.1:7890";
 ```
 
 ## 更新系统
-```
+
+```txt
 sudo apt update && sudo apt upgrade
 ```
 
 ## 安装CUDA
-```
-sudo apt install system76-cuda-latest system76-cudnn-10.2
+
+```txt
+sudo apt install system76-cuda-latest system76-cudnn-11.2
 ```
 
 ## 安装常用软件
+
+```txt
+sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey gnome-mpv folder-color gnome-sushi nautilus-admin nautilus-scripts -y
 ```
-sudo apt install neofetch zsh fish git curl wget proxychains4 vim ranger tmux htop unzip nim ruby ruby-dev ruby-colorize gnome-tweaks stacer peek flameshot screenkey gnome-mpv folder-color gnome-sushi -y
+
+## celluloid(gnome-mpv)
+
 ```
+
+```
+
 ## Github设置代理
-```
+
+```txt
 git config --global http.proxy http://127.0.0.1:7890
 ```
 
 ## Anaconda镜像源设置
-```
+
+```txt
 nano ~/.condarc
 
 default_channels:
@@ -47,7 +62,8 @@ channels:
 ```
 
 ## Pypi镜像源设置
-```
+
+```txt
 nano  ~/.config/pip/pip.conf
 
 [global]
@@ -56,29 +72,44 @@ format = columns
 ```
 
 ## Pip安装常用库
-```
+
+```txt
 pip install django flask fastapi aiohttp requests beautifulsoup4 scrapy youtube-dl
 ```
 
 ## 安装colors
-```
+
+```txt
 sudo gem install colorls
 ```
 
 ## 安装Nautilus Terminal
 ```
+sudo apt install python3-nautilus python3-psutil python3-pip libglib2.0-bin dconf-editor
 sudo pip3 install nautilus-terminal
 sudo nautilus-terminal --install-system
 nautilus -q
 ```
 
-## 安装Code插件
+## Nautilus Copy Path/Name
+
+```txt
+sudo apt install python-nautilus python3-gi
+git clone https://github.com/chr314/nautilus-copy-path.git
+cd nautilus-copy-path
+make install
+nautilus -q
 ```
+
+## 安装Code插件
+
+```txt
 wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash
 ```
 
 ## Tmux配置
-```
+
+```txt
 cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
@@ -86,79 +117,72 @@ cp .tmux/.tmux.conf.local .
 ```
 
 ## 安装Node.js
-```
+
+```txt
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
-```
 
-## 安装Tauon
-```
-flatpak install flathub com.github.taiko2k.tauonmb
+代理
+npm config set proxy=http://127.0.0.1:7890
+
+# 配置指向源
+npm config set registry http://registry.npm.taobao.org
+npm config set registry https://registry.npm.taobao.org
 ```
 
 ## 安装OBS
-```
+
+```txt
 sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt update
 sudo apt install obs-studio
 ```
 
-## 安装Typora
-```
-wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
-sudo add-apt-repository 'deb https://typora.io/linux ./'
-sudo apt-get update
-sudo apt-get install typora
-```
-
-## 安装Edge
-```
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
-sudo rm microsoft.gpg
-sudo apt update
-sudo apt install microsoft-edge-dev
-```
-
 ## Zsh配置
 
 ### 安装Oh-my-zsh
-```
+
+```txt
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh 
 ```
 
 ### 安装Autosuggestions
-```
+
+```txt
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 ### 安装Syntax-highlighting 
-```
+
+```txt
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 
 ```
 
 ### 安装Powerlevel10k
-```
+
+```txt
 git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
 ### 下载字体
-```
+
+```txt
 wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 ```
 
 ### 配置Zsh皮肤
-```
+
+```txt
 p10k configure 
 ```
 
 ### 添加环境变量
-```
+
+```txt
 vim ~/.zshrc
 ```
-添加以下内容到文件中
-```
+
+```txt
 export PATH=/home/cjh/.local/bin:$PATH
 export PATH=/home/cjh/anaconda3/bin:$PATH
 
@@ -172,20 +196,20 @@ alias az="sudo dpkg -i"
 alias v="vim"
 alias lc="colorls"
 alias pi="ssh -p 22 pi@192.168.1.102"
-```
-替换文件中以下的内容
-```
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting) 
 ```
 
 ### 把Zsh是设为默认Shell
-```
+
+```txt
 sudo usermod -s /usr/bin/zsh $(whoami)
 ```
 
 ## 增加硬盘
-```
+
+```txt
 lsblk
 #格式化
 sudo mkfs -t ext4 /dev/sdb
@@ -205,4 +229,3 @@ sudo mount -a
 #恢复
 cp /etc/fstab.bak /etc/fstab
 ```
-
